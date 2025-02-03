@@ -17,14 +17,15 @@ import com.alibaba.fastjson2.JSON;
 import de.siegmar.fastcsv.reader.CsvReader;
 import de.siegmar.fastcsv.reader.CsvRecord;
 
+
 /**
  * Extracting Domains from CSV file and write a JSON file.
- * 
- * dependency: 
- *  - FastCsv by Siegmar
- *  - FastJSON by Alibaba
- * 
- * source: <a href="https://knowledge.hubspot.com/forms/what-domains-are-blocked-when-using-the-forms-email-domains-to-block-feature"> HubSpot </a>
+ *
+ * dependency: - FastCsv by Siegmar - FastJSON by Alibaba
+ *
+ * source:
+ * <a href="https://knowledge.hubspot.com/forms/what-domains-are-blocked-when-using-the-forms-email-domains-to-block-feature">
+ * HubSpot </a>
  */
 public class ExtractCsv {
 
@@ -32,6 +33,7 @@ public class ExtractCsv {
         Path file = Paths.get(System.getProperty("user.dir"), "free-domain.csv");
 
         try (CsvReader<CsvRecord> csv = CsvReader.builder().ofCsvRecord(file)) {
+
             var list = csv.stream().map(rec -> rec.getFields().get(0)).toList();
 
             Map<String, Object> jsonMap = new HashMap<>();
@@ -41,7 +43,15 @@ public class ExtractCsv {
 
             Path jsonFile = Paths.get("domains.json");
             try {
-                Files.write(jsonFile, jsonString.getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE, StandardOpenOption.WRITE);
+                if (Files.exists(jsonFile)) {
+                    // create file and write if not exist.
+                    Files.write(
+                            jsonFile,
+                            jsonString.getBytes(StandardCharsets.UTF_8),
+                            StandardOpenOption.CREATE,
+                            StandardOpenOption.WRITE);
+                }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
