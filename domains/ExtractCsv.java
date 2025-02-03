@@ -17,6 +17,15 @@ import com.alibaba.fastjson2.JSON;
 import de.siegmar.fastcsv.reader.CsvReader;
 import de.siegmar.fastcsv.reader.CsvRecord;
 
+/**
+ * Extracting Domains from CSV file and write a JSON file.
+ * 
+ * dependency: 
+ *  - FastCsv by Siegmar
+ *  - FastJSON by Alibaba
+ * 
+ * source: <a href="https://knowledge.hubspot.com/forms/what-domains-are-blocked-when-using-the-forms-email-domains-to-block-feature"> HubSpot </a>
+ */
 public class ExtractCsv {
 
     public static void main(String... args) throws IOException {
