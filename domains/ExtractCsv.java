@@ -16,8 +16,6 @@ import com.alibaba.fastjson2.JSON;
 
 import de.siegmar.fastcsv.reader.CsvReader;
 import de.siegmar.fastcsv.reader.CsvRecord;
-
-
 /**
  * Extracting Domains from CSV file and write a JSON file.
  *
@@ -30,11 +28,12 @@ import de.siegmar.fastcsv.reader.CsvRecord;
 public class ExtractCsv {
 
     public static void main(String... args) throws IOException {
-        Path file = Paths.get(System.getProperty("user.dir"), "free-domain.csv");
+        Path file = Paths.get( "free-domain.csv");
 
         try (CsvReader<CsvRecord> csv = CsvReader.builder().ofCsvRecord(file)) {
 
             var list = csv.stream().map(rec -> rec.getFields().get(0)).toList();
+            System.out.println(list);
 
             Map<String, Object> jsonMap = new HashMap<>();
             jsonMap.put("email_domains", list);
