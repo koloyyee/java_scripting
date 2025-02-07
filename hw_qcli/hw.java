@@ -7,14 +7,17 @@
 //Q:CONFIG quarkus.banner.enabled=false
 //Q:CONFIG quarkus.log.level=WARN
 
-import picocli.CommandLine;
+import com.oracle.svm.core.annotate.Inject;
 
-import jakarta.enterprise.context.Dependent;
-import jakarta.inject.Inject;
-import io.quarkus.runtime.annotations.QuarkusMain;
-import io.quarkus.runtime.QuarkusApplication;
-import io.quarkus.runtime.Quarkus;
-
+/**
+ * Run with `jbang hw.java "your message here."
+ * 
+ * or `chmod +x ./hw.java && ./hw.java "message here."`
+ * 
+ * 
+ * create native executable with GraalVM
+ * `jbang export native hw.java`
+ */
 @CommandLine.Command
 public class hw implements Runnable {
 
